@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCP CON // Coming Soon</title>
+    <link rel="icon" type="image/x-icon" href="ico.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #060709;
+            background-image: linear-gradient(rgba(6, 7, 9, 0.94), rgba(6, 7, 9, 0.97)), url('bg.png');
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 20px;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Top Spacer for layout balancing */
+        .top-spacer {
+            height: 20px;
+        }
+
+        /* Main Flex Central Display Section */
+        .text-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .typed-text {
+            color: #e2e8f0;
+            letter-spacing: -0.02em;
+            font-weight: 500;
+            text-align: center;
+            
+            /* Fluid responsive typography setup for PC, Mobile and Smart TV scales */
+            font-size: clamp(1.5rem, 4vw + 0.5rem, 4.5rem);
+            line-height: 1.2;
+            transition: font-family 0.15s ease-in-out;
+        }
+
+        /* Fluid Responsive Terminal Blinking Cursor */
+        .cursor {
+            display: inline-block;
+            background-color: #7a8a99;
+            margin-left: 8px;
+            animation: blink 1s step-end infinite;
+            
+            /* Responsive box size matching the text scale dynamic fluid width */
+            width: clamp(6px, 0.8vw, 16px);
+            height: clamp(22px, 4.5vw, 60px);
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            from, to { background-color: transparent }
+            50% { background-color: #7a8a99 }
+        }
+
+        /* Fixed Baseline Minimal Footer Layout */
+        footer {
+            width: 100%;
+            text-align: center;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace;
+            font-size: clamp(0.7rem, 1vw + 0.2rem, 0.95rem);
+            color: #475569;
+            letter-spacing: 0.5px;
+            user-select: none;
+        }
+
+        /* Media adjustments specific to TV configurations */
+        @media (min-width: 1920px) {
+            body { padding: 80px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-spacer"></div>
+
+    <!-- Center Component Area -->
+    <div class="text-wrapper">
+        <span class="typed-text"></span><span class="cursor"></span>
+    </div>
+
+    <!-- Stationary Clean Footer Branding -->
+    <footer>
+        Powered by SCPSEC
+    </footer>
+
+    <script>
+        const word = "Coming Soon...";
+        
+        // Expanded 8 Different Terminal/Monospace Font Framework Styles
+        const terminalFonts = [
+            'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace', // Modern Apple/Unix
+            '"Courier New", Courier, monospace',                                           // Classic Hardcore Mechanical
+            '"Liberation Mono", monospace',                                                // Linux Native Clean Monospace
+            'Consolas, "Andale Mono", monospace',                                          // Windows Code Classic
+            '"Lucida Console", Monaco, monospace',                                         // Retro Coding Terminal
+            'SF Mono, Roboto Mono, monospace',                                             // Android & Modern Web Terminal
+            '"OCR A Extended", "Courier New", monospace',                                  // Pure Raw Machine/Hardware style
+            'monospace'                                                                    // Default System Raw Core fallback
+        ];
+        
+        let fontIndex = 0;
+        let textElement = document.querySelector('.typed-text');
+        
+        // Setup Safe Web Audio Context API Structure
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playRealKeyboardClick() {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const bufferSize = audioCtx.sampleRate * 0.035; // ~35ms transient envelope
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            // Build raw white noise frame component
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            const noiseNode = audioCtx.createBufferSource();
+            noiseNode.buffer = buffer;
+            
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(1300 + Math.random() * 350, audioCtx.currentTime);
+            filter.Q.setValueAtTime(3.5, audioCtx.currentTime);
+            
+            const gainNode = audioCtx.createGain();
+            gainNode.gain.setValueAtTime(0.045, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.028);
+            
+            noiseNode.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            noiseNode.start();
+        }
+
+        function triggerTyping() {
+            // Hot-swap font family across array frames
+            textElement.style.fontFamily = terminalFonts[fontIndex];
+            
+            let charArray = word.split("");
+            var loopTyping = function() {
+                if (charArray.length > 0) {
+                    textElement.innerHTML += charArray.shift();
+                    playRealKeyboardClick();
+                    setTimeout(loopTyping, 110 + Math.random() * 60); 
+                } else {
+                    setTimeout(triggerDeleting, 3200); 
+                }
+            };
+            loopTyping();
+        }
+
+        function triggerDeleting() {
+            let charArray = word.split("");
+            var loopDeleting = function() {
+                if (charArray.length > 0) {
+                    charArray.pop();
+                    textElement.innerHTML = charArray.join("");
+                    playRealKeyboardClick();
+                    setTimeout(loopDeleting, 45); 
+                } else {
+                    // Progress to the next distinct font style index frame
+                    fontIndex = (fontIndex + 1) % terminalFonts.length;
+                    setTimeout(triggerTyping, 700);
+                }
+            };
+            loopDeleting();
+        }
+
+        // Auto Initializer Loop Setup
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(triggerTyping, 1000);
+        });
+
+        // Implicit user interaction binding override for cross-browser autoplay permissions
+        document.body.addEventListener('click', () => {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+        });
+    </script>
+
+</body>
+</html>
