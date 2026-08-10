@@ -5,6 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SCP CON // Coming Soon</title>
     <link rel="icon" type="image/x-icon" href="ico.png">
+    
+    <!-- Meta tags and SEO/Open Graph Data -->
+    <meta name="title" content="SCPSEC — Secure Cyber Protection & Security Ecosystem">
+    <meta name="description" content="SCPSEC is an open and next-gen cybersecurity ecosystem building developer-first tools across Operating Systems, AI, Cloud Infrastructure, and Security.">
+    <meta name="keywords" content="SCPSEC, Cybersecurity, Linux, Open Source, Operating System, AI, Cloud, Security, Scpsec OS">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="author" content="SCPSEC Team">
+    <link rel="canonical" href="https://scpcon.scpsec.cc/">
+
+    <!-- Mastodon Link Header -->
+    <link rel="me" href="https://defcon.social/@scpsec">
+
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://scpcon.scpsec.cc/">
+    <meta property="og:title" content="SCPSEC — Secure Cyber Protection & Security Ecosystem">
+    <meta property="og:description" content="An open and next-gen cybersecurity ecosystem spanning Operating Systems, AI, Cloud Infrastructure, and Security.">
+    <meta property="og:image" content="https://github.com/scpsec/scpsec-logo/blob/main/logo_circle.png?raw=true">
+
+    <!-- Twitter / X Meta Tags -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@scpseccompany">
+    <meta property="twitter:url" content="https://x.com/scpseccompany">
+    <meta property="twitter:title" content="SCPSEC — Secure Cyber Protection & Security Ecosystem">
+    <meta property="twitter:description" content="An open and next-gen cybersecurity ecosystem spanning Operating Systems, AI, Cloud Infrastructure, and Security.">
+    <meta property="twitter:image" content="https://github.com/scpsec/scpsec-logo/blob/main/logo_circle.png?raw=true">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "SCPSEC",
+        "url": "https://scpcon.scpsec.cc/",
+        "logo": "https://github.com/scpsec/scpsec-logo/blob/main/logo_circle.png?raw=true",
+        "sameAs": [
+            "https://github.com/scpsec/",
+            "https://x.com/scpseccompany"
+        ],
+        "description": "Secure Cyber Protection & Security Ecosystem. Open-source ecosystem building Operating Systems, AI tools, and Security Infrastructure."
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -110,13 +153,13 @@
         // Expanded 8 Different Terminal/Monospace Font Framework Styles
         const terminalFonts = [
             'ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace', // Modern Apple/Unix
-            '"Courier New", Courier, monospace',                                           // Classic Hardcore Mechanical
+            '"Courier New", Courier, monospace',                                            // Classic Hardcore Mechanical
             '"Liberation Mono", monospace',                                                // Linux Native Clean Monospace
-            'Consolas, "Andale Mono", monospace',                                          // Windows Code Classic
-            '"Lucida Console", Monaco, monospace',                                         // Retro Coding Terminal
-            'SF Mono, Roboto Mono, monospace',                                             // Android & Modern Web Terminal
-            '"OCR A Extended", "Courier New", monospace',                                  // Pure Raw Machine/Hardware style
-            'monospace'                                                                    // Default System Raw Core fallback
+            'Consolas, "Andale Mono", monospace',                                           // Windows Code Classic
+            '"Lucida Console", Monaco, monospace',                                          // Retro Coding Terminal
+            'SF Mono, Roboto Mono, monospace',                                              // Android & Modern Web Terminal
+            '"OCR A Extended", "Courier New", monospace',                                   // Pure Raw Machine/Hardware style
+            'monospace'                                                                     // Default System Raw Core fallback
         ];
         
         let fontIndex = 0;
